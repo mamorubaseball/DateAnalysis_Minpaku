@@ -70,6 +70,7 @@ mean_absolute_error(test_y, y_pred)
 
 ### step4:UI
 場所や宿泊人数を指定し、価格の予測を行う。
+
 ![UI](Minpaku/スクリーンショット 2021-09-21 18.47.35.png)
  
 # Author
