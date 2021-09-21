@@ -51,7 +51,7 @@ step1で取得したデータから、価格を予測するための特徴量を
 ### step3:モデルの作成と訓練データとテストデータの比較『誤差の算出』
 今回はsklearnのinearRegression()を使用した。
 
-'''
+```
 train_x,train_y=x[:n],y[:n]
 test_x,test_y=x[n:],y[n:]
 
@@ -66,11 +66,11 @@ coef
 
 #評価関数
 mean_absolute_error(test_y, y_pred)
-'''
+```
 
 ### step4:UI
 場所や宿泊人数を指定し、価格の予測を行う。
-![UI](スクリーンショット 2021-09-21 18.47.35.png)
+![UI](Minpaku/スクリーンショット 2021-09-21 18.47.35.png)
  
 # Author
 * 名前：谷本　守
