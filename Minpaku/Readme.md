@@ -17,31 +17,60 @@ Airbnbからデータを取得し、価格の予測をするファイル。
 
 # 実行環境
 * Python 3.8.3
+* jupyter lab
 
 # Installation
 ```bash
 pip install　pandas
 pip install　numpy
 pip install　sklearn
+pip install streamlit
 ```
 # 最適解の算出概要
-####step1:データ抽出
-selenium,bs４を用いて、https://www.airbnb.jpからデータを抽出
-####step2:特徴量抽出
-step1で取得したデータから、価格を予測するための特徴量を抽出
+### step1:データ抽出
+selenium,bs４を用いて、https://www.airbnb.jpからデータを抽出と考えていたが、Exploratory Public(https://exploratory.io/download-public)からデータをダウンロードできたので、こちらのデータを使って分析を行う
+
+### step2:特徴量抽出
+step1で取得したデータから、価格を予測するための特徴量を抽出。
+データの前処理などはjupyter labで行った。
+
+```
+ print(df.corr()['price'])
+ sns.heatmap(df.corr(), square=True)
+```
+
+データセットには、場所がわかるデータもあったので、都京23区の地価を調べ、市地区から地下平均に変換したデータセットを作成。
+以下のデータから予測モデルの作成を行った
 
 - place
 - amenities
+- beds
 - accommodates
-- number_of_reviews
-- review_scores_rating
+- city_price
 
-####step3:訓練データとテストデータの比較『誤差の算出』
-####step4:
-####step5:
+### step3:モデルの作成と訓練データとテストデータの比較『誤差の算出』
+今回はsklearnのinearRegression()を使用した。
 
-###ファイルの説明
+'''
+train_x,train_y=x[:n],y[:n]
+test_x,test_y=x[n:],y[n:]
 
+model=linear_model.LinearRegression()
+
+model.fit(train_x,train_y)
+
+coef=model.coef_
+intercept=model.intercept_
+y_pred=np.dot(np.array(coef),np.array(test_x).T)+intercept
+coef
+
+#評価関数
+mean_absolute_error(test_y, y_pred)
+'''
+
+### step4:UI
+場所や宿泊人数を指定し、価格の予測を行う。
+![UI](スクリーンショット 2021-09-21 18.47.35.png)
  
 # Author
 * 名前：谷本　守
